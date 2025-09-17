@@ -16,7 +16,7 @@ import AnalyticsIcon from '@mui/icons-material/Analytics';
 import axios from 'axios';
 import FeatureChart from './FeatureChart';
 
-const HandwritingTest = () => {
+const HandwritingTest = ({ onResult }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [dragActive, setDragActive] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
@@ -100,6 +100,9 @@ const HandwritingTest = () => {
       );
 
       setAnalysisResult(response.data);
+      if(onResult){
+        onResult(response.data);
+      }
     } catch (err) {
       setError(
         err.response?.data?.error || 
